@@ -139,4 +139,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["https://pacific-coast-78888.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = ["https://hyfera.herokuapp.com"]
