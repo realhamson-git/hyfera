@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style2.css' %}" />
+{% endblock css %}
+{% block content %}
+   <section class="movie-page-section">
+    <div class="main-movie-page-content">
+        <h1 class="movie-name">{{ singlemovie.movie }}</h1>
+        <div class="movie-section">
+            <img src="{{ singlemovie.image.url }}" alt="">
+            <div class="poster-section">
+                <h1>Description : </h1>
+                <p>
+                    {{ singlemovie.description }}
+                </p>
+                <div class="tags">
+                    <a href="#">tags</a>
+                    <a href="#">tags</a>
+                    <a href="#">Report</a>
+                </div>
+                <h1>Casts : </h1>
+                {% for item in casts %}
+                    <h3>
+                        {{ item.actors }}
+                    </h3>
+                {% endfor %}
+            </div>
+            
+        </div>
+        <div class="outercard" style="border:1px solid black ;">
+            <section class="cardgroup">
+               {% for movie in relatedmovies %} 
+              <div id="card">
+                <div class="innercard1">
+                  <img class="movieimage" src="{{ movie.image.url }}" alt="" />
+                  <a href="{{ movie.get_absolute_url }}" class="moviename linehieght"> {{ movie.movie }}</a>
+                  <h4 class="moviename"> {{ movie.language.get.language }}</h4>
+                </div>
+              </div>
+                {% endfor %}
+            </section>
+        </div>
+        <div class="screenshots">
+            <h1>Screenshots :</h1>
+            {% for image in screenshot %}
+            <img src="{{ image.screenshots.url }}"/>
+            {% endfor %}
+            <a href="#">
+                <img src="{% static 'images/a.png' %}" />
+            </a>
+        </div>
+        <h1>Downloads : </h1>
+        <div class="tags">
+            {% for link in links %}
+            <a href="{{ link.shrink_url }}">{{ link.quality }}</a>
+            {% endfor %}
+        </div>
+        <a href="#">
+            <img src="{% static 'images/a.png' %}" width="100%" />
+        </a>
+        
+    </div>
+    <div class="ads-banner-img ">
+        <div class="banner">
+            <img src="{% static 'images/bannaer.jpeg' %}" />
+        </div>
+    </div>
+   </section>
+{% endblock %}

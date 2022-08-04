@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="outercard" >
+  {% if allmovies %}
+    <section class="cardgroup">
+     {% for movie in allmovies %} 
+    <div id="card">
+      <div class="innercard1">
+        <img class="movieimage" src="{{ movie.image.url }}" alt="" />
+        <a href="{{ movie.get_absolute_url }}" class="moviename linehieght"> {{ movie.movie }}</a>
+        <h4 class="moviename"> {{ movie.language.get.language }}</h4>
+      </div>
+    </div>
+      {% endfor %}
+  </section>
+  {% else %}
+  <div class="result">
+    <img src="{% static './images/nojobsfound.webp' %}" />
+  </div>
+  {% endif %}
+  </div>
+{% endblock %}
+{% block pagination %}
+<div style="display: flex ;justify-content:center;">
+  <div class="pagination">
+
+
+    {% if allmovies.has_previous %}
+    <a href="?page={{ allmovies.previous_page_number}}">&laquo;</a>
+    <a href="?page={{ allmovies.previous_page_number}}">{{ allmovies.previous_page_number}}</a>
+    {% endif %}
+    <a class="active">{{ allmovies.number }}</a>
+    {% if allmovies.has_next %}
+    <a href="?page={{ allmovies.next_page_number }} ">{{ allmovies.next_page_number }}</a>
+    <a href="?page={{ allmovies.next_page_number }}">&raquo;</a>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock pagination %}

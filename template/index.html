@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- main content -->
+<div class="outercard">
+  <h4 class="content-h-heading">Latest Movies</h4>
+  <section class="cardgroup">
+    {% for movie in latest %}
+    <div id="card">
+      <div class="innercard1">
+        <a href="{{ movie.get_absolute_url }}"><img class="movieimage" src="{{ movie.image.url }}" alt="" /></a>
+        <div style="margin-left: 5px;">
+          <a class="moviename" style="font-weight:550 ;" href="{{ movie.get_absolute_url }}">
+            {{ movie.movie|slice:':40' }}
+          </a>
+          <h4 style="font-weight:150 ;"> {{ movie.language.get.language }}</h4>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  <h4 class="content-h-heading">All Movies</h4>
+  <section class="cardgroup">
+    {% for movie in allmovies %}
+    <div id="card">
+      <div class="innercard1">
+        <a href="{{ movie.get_absolute_url }}"><img class="movieimage" src="{{ movie.image.url }}" alt="" /></a>
+        <div style="margin-left: 5px;">
+          <a class="moviename" style="font-weight:550 ;" href="{{ movie.get_absolute_url }}">
+            {{ movie.movie|slice:':40' }}
+          </a>
+          <h4 style="font-weight:150 ;"> {{ movie.language.get.language }}</h4>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+</div>
+
+{% endblock %}
+{% block pagination %}
+<div style="display: flex ;justify-content:center;">
+  <div class="pagination">
+
+
+    {% if allmovies.has_previous %}
+    <a href="?page={{ allmovies.previous_page_number}}">&laquo;</a>
+    <a href="?page={{ allmovies.previous_page_number}}">{{ allmovies.previous_page_number}}</a>
+    {% endif %}
+    <a class="active">{{ allmovies.number }}</a>
+    {% if allmovies.has_next %}
+    <a href="?page={{ allmovies.next_page_number }} ">{{ allmovies.next_page_number }}</a>
+    <a href="?page={{ allmovies.next_page_number }}">&raquo;</a>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock pagination %}

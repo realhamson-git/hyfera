@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{% block title %} {% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    
+    {% block css %}{% endblock %}
+    
+    <link rel="stylesheet" href="{% static 'funct.js' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+    <!-- Header starts here -->
+
+    <div class="wrapper">
+        <nav>
+            <input type="checkbox" id="show-search" />
+            <input type="checkbox" id="show-menu" />
+            <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+            <div class="content">
+                <div class="logo"><a href="{% url 'index' %}">HYFERA</a></div>
+                <ul class="links">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li>
+                        <a href="#" class="desktop-link">Language</a>
+                        <input type="checkbox" id="show-features" />
+                        <label for="show-features">Language</label>
+                        <ul>
+                            <li><a href="{% url 'language-page' 'hindi' %}">Hindi</a></li>
+                            <li><a href="{% url 'language-page' 'english' %}">Engligh</a></li>
+                            <li><a href="{% url 'language-page' 'dual audio' %}">Dual Audio</a></li>
+                            <li><a href="{% url 'language-page' 'tamil' %}">Tamil</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'categories-page' 'hollywood' %}">Hollywood</a></li>
+                    <li><a href="{% url 'categories-page' 'bollywood' %}">Bollywood</a></li>
+                    <li><a href="{% url 'categories-page' 'webseries' %}">Web Series</a></li>
+                    <li><a href="{% url 'categories-page' 'mcu' %}">MCU</a></li>
+                    <li><a href="{% url 'categories-page' 'dcu' %}">DCU</a></li>
+                </ul>
+            </div>
+            <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
+            <form action="{% url 'search-page' %}" class="search-box" method="get">
+                <input type="text" placeholder="Type Something to Search..." name="q" required />
+                <button type="submit" class="go-icon">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </button>
+            </form>
+        </nav>
+    </div>
+    <!-- Header Ends here -->
+    <div class="mainsection">
+        <div id="inner">
+            {% for tag in alltags %}
+            <a class="head2" href="{{ tag.get_absolute_url }}"><span class="span1"><button class="button1"> {{ tag.tags }} </button></span></a>
+            {% endfor %}
+        </div>
+        {% block content %}
+        {% endblock %}
+       
+        {% block pagination %}
+        {% endblock pagination %}
+
+        <footer>
+            <div class="main-content">
+                <div class="left box">
+                    <h2>Disclaimer</h2>
+                    <div class="content">
+                        <p>
+                            HYFERA does not host any files on it's servers. All files or
+                            contents hosted on third party websites. katmoviehd.sx does not
+                            accept responsibility for contents hosted on third party websites.
+                            We just index those links which are already available in internet
+                        </p>
+                        <div class="social">
+                            <a href="https://facebook.com/coding.np"><span class="fab fa-facebook-f"></span></a>
+                            <a href="#"><span class="fab fa-twitter"></span></a>
+                            <a href="https://instagram.com/coding.np"><span class="fab fa-instagram"></span></a>
+                            <a href="https://youtube.com/c/codingnepal"><span class="fab fa-youtube"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center box">
+                    <h2>Request Movie</h2>
+                    <div class="content">
+                        <form id="tt" action="{% url 'request-page' %}" method="post">
+                            {% csrf_token %}
+                            <h3>Movie Name</h3>
+                            <input class="tf" type="text" name="movie" />
+
+                            <h3>Email ID</h3>
+                            <input class="tf" type="email" name="email" /><br />
+                            <button id="bt" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="right box">
+                    <h2>News Latter</h2>
+                    <div class="content">
+                        <form action="#">
+                            <div class="email">
+                                <div class="text">Email *</div>
+                                <input class="tf" type="email" required />
+                            </div>
+                            <div class="msg">
+                                <div class="text">Subject *</div>
+
+                                <select name="sub" class="subject">
+                                    <option class="option" value="No Action">Select</option>
+                                    <option class="option" value="Web Series">Web Series</option>
+                                    <option class="option" value="Hollywood Movie">Hollywood Movie</option>
+                                    <option class="option" value="Hindi Webseries">Hindi Webseries</option>
+                                    <option class="option" value="18+ Movies">18+ Movies</option>
+                                </select>
+                            </div>
+                            <div class="btn">
+                                <button type="submit">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <center>
+                    <span class="credit">Created By
+                        <a href="#">Team Hyfera</a> |
+                    </span>
+                    <span class="far fa-copyright"></span><span> 2022 All rights reserved.</span>
+                </center>
+            </div>
+        </footer>
+    </div>
+
+
+
+</body>
+
+</html>
