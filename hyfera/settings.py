@@ -26,7 +26,7 @@ SHRINK_API = '49dddac5d5687147e961d49342ae8f9cbe45a5d1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','hyfera.herokuapp.com']
 
 
 # Application definition
