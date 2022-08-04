@@ -22,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = os.environ['SECRET_KEY']
 SHRINK_API = os.environ['SHRINK_API']
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 ALLOWED_HOSTS = ['127.0.0.1','hyfera.herokuapp.com']
 
 
@@ -40,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web',
     'django.contrib.admindocs',
+    'web',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +82,13 @@ WSGI_APPLICATION = 'hyfera.wsgi.application'
 
 DATABASES = {
     'default': {
-
-        'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'name' : BASE_DIR / 'db.sqlite3'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        
     }
 }
+
 DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
 
 
