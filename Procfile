@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT hyfera.wsgi:application
+web: waitress-serve --port=8000 hyfera.wsgi:application

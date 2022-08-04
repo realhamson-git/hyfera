@@ -24,7 +24,7 @@ def index(request):
     try:
         page_obj = p.page(page_number)
     except:
-        page_obj = p.page(1)
+        page_obj = p.page(1) 
 
     context = {'alltags':allTags,'latest':allMovies[:6],'allmovies':page_obj,'last_page':p}
     return render(request, 'index.html', context)

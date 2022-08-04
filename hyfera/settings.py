@@ -27,6 +27,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 SHRINK_API = os.environ['SHRINK_API']
 
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1','hyfera.herokuapp.com']
@@ -83,9 +84,8 @@ WSGI_APPLICATION = 'hyfera.wsgi.application'
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'name' : BASE_DIR / 'db.sqlite3'
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        
+        # 'name' : BASE_DIR / 'db.sqlite3'
     }
 }
 
@@ -138,3 +138,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = ["https://pacific-coast-78888.herokuapp.com"]
