@@ -4,8 +4,7 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 import requests
 from django.conf import settings
-from PIL import Image
-from io import BytesIO
+
 
 # Create your models here.
 
@@ -43,7 +42,7 @@ class LanguageModel(models.Model):
 class MovieModel(models.Model):
     movie = models.CharField(max_length = 200)
     slug = models.SlugField(default = 'empty')
-    image = models.ImageField(upload_to = 'posters')
+    image = models.URLField(max_length = 1000)
     description = models.TextField()
     language = models.ManyToManyField(LanguageModel)
     cast = models.ManyToManyField(CastModel)
@@ -66,7 +65,7 @@ class MovieModel(models.Model):
     
 class ScreenshotsModel(models.Model):
     movie = models.ForeignKey(MovieModel, on_delete = models.CASCADE)
-    screenshots = models.ImageField(upload_to = 'screenshots')
+    screenshots = models.URLField(max_length = 1000)
     def __str__(self):
         moviename = MovieModel.objects.get(movie = self.movie)
         return moviename.movie
@@ -87,11 +86,14 @@ class UrlModel(models.Model):
         return moviename.movie
     
     def save(self, *args, **kwargs):
-        movieObj = MovieModel.objects.get(movie = self.movie)
-        url = f'https://shrinkearn.com/api?api={ settings.SHRINK_API }&url={ self.url }&alias={ movieObj.slug }-hyfera-1'
-        req = requests.get(url)
-        json = req.json()
-        self.shrink_url = json['shortenedUrl']
+        if(not self.shrink_url ):
+            movieObj = MovieModel.objects.get(movie = self.movie)
+            url = f'https://shrinkearn.com/api?api={ settings.SHRINK_API }&url={ self.url }&alias={ movieObj.slug[:23] }-{ self.quality }'
+            req = requests.get(url)
+            json = req.json()
+            self.shrink_url = json['shortenedUrl']
+            super(UrlModel, self).save(*args, **kwargs)
         super(UrlModel, self).save(*args, **kwargs)
+        
 
     

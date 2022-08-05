@@ -8,7 +8,7 @@
     {% for movie in latest %}
     <div id="card">
       <div class="innercard1">
-        <a href="{{ movie.get_absolute_url }}"><img class="movieimage" src="{{ movie.image.url }}" alt="" /></a>
+        <a href="{{ movie.get_absolute_url }}"><img src="{{ movie.image }}" class="movieimage" border="0"></a>        
         <div style="margin-left: 5px;">
           <a class="moviename" style="font-weight:550 ;" href="{{ movie.get_absolute_url }}">
             {{ movie.movie|slice:':40' }}
@@ -24,7 +24,7 @@
     {% for movie in allmovies %}
     <div id="card">
       <div class="innercard1">
-        <a href="{{ movie.get_absolute_url }}"><img class="movieimage" src="{{ movie.image.url }}" alt="" /></a>
+        <a href="{{ movie.get_absolute_url }}"><img src="{{ movie.image }}" class="movieimage" border="0"></a>
         <div style="margin-left: 5px;">
           <a class="moviename" style="font-weight:550 ;" href="{{ movie.get_absolute_url }}">
             {{ movie.movie|slice:':40' }}

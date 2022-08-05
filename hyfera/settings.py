@@ -27,7 +27,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 SHRINK_API = os.environ['SHRINK_API']
 
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1','hyfera.herokuapp.com']
@@ -89,7 +88,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
+DATABASES['default'] = dj_database_url.config(default= os.environ['DATABASE_URL'])
 
 
 # Password validation
